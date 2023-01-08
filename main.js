@@ -7,14 +7,14 @@ import { UI } from './UI.js';
 window.addEventListener("load", function() {
     const canvas = document.getElementById("canvas1");
     const ctx = canvas.getContext("2d");
-    canvas.width = 500;
+    canvas.width = 1500;
     canvas.height = 500;
 
     class Game {
         constructor(width, height){
             this.width = width;
             this.height = height;
-            this.groundMarin = 50; //ground height
+            this.groundMarin = 80; //ground height
             this.speed = 0; //background speed
             this.maxSpeed = 6;  //background maxspeed
             this.background = new Background(this);
@@ -22,11 +22,15 @@ window.addEventListener("load", function() {
             this.input = new InputHandler(this);
             this.UI = new UI(this);
             this.enemies = [];
+            this.particles = [];
+            this.maxParticles = 30;
             this.enemyTimer = 0;
             this.enemyInterval = 1000;
-            this.debug = true; //press 'd' to show the rectangle
+            this.debug = false; //press 'd' to show the rectangle
             this.score = 0;
             this.fontColor = "white";
+            this.player.currentState = this.player.states[5];
+            this.player.currentState.enter();
         }
         update(deltaTime){
             this.background.update();
@@ -42,12 +46,23 @@ window.addEventListener("load", function() {
                 enemy.update(deltaTime);
                 if (enemy.markedForDeletion) this.enemies.splice(this.enemies.indexOf(enemy), 1);
             });
+            //handle particle
+            this.particles.forEach((particle, index) => {
+                particle.update();
+                if (particle.markedForDeletion) this.particles.splice(index, 1);
+            });
+            if (this.particles.length > this.maxParticles) {
+                this.particles = this.particles.slice(0, this.maxParticles);
+            }
         }
         draw(context){
             this.background.draw(context);
             this.player.draw(context);
             this.enemies.forEach(enemy => {
                 enemy.draw(context);
+            });
+            this.particles.forEach(particle => {
+                particle.draw(context);
             });
             this.UI.draw(context);
         }

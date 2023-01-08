@@ -2,6 +2,7 @@ class Enemy {
     constructor() {
         this.frameX = 0;
         this.frameY = 0;
+        this.groundMargin = 50;
         this.fps = 5;
         this.frameInterval = 1000/this.fps;
         this.frameTimer = 0;
@@ -56,7 +57,7 @@ export class Enemy2 extends Enemy {
         this.width = 135;
         this.height = 160;
         this.x = this.game.width;
-        this.y = this.game.height - this.height;
+        this.y = this.game.height - this.height -this.groundMargin;
         this.speedX =0;
         this.speedY = 0;
         this.maxFrame = 2;
@@ -72,7 +73,7 @@ export class Enemy3 extends Enemy {
         this.width = 119;
         this.height = 140;
         this.x = this.game.width;
-        this.y = this.game.height - this.height;
+        this.y = this.game.height - this.height - this.groundMargin;
         this.speedX = 1;
         this.speedY = 0;
         this.maxFrame = 6;
