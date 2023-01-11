@@ -14,7 +14,7 @@ window.addEventListener("load", function() {
         constructor(width, height){
             this.width = width;
             this.height = height;
-            this.groundMarin = 80; //ground height
+            //this.groundMarin = 80; //ground height
             this.speed = 0; //background speed
             this.maxSpeed = 6;  //background maxspeed
             this.background = new Background(this);

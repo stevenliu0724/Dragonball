@@ -25,16 +25,15 @@ export class Sitting extends State {
         super("SITTING", game);
     }
     enter(){
-        this.game.player.width = 128;
-        this.game.player.height = 120;
-        this.game.player.maxFrame = 1;
-        this.game.player.frameY = 4.8;
-        this.game.player.frameInterval = 1000/15;
+        this.game.player.frameX = 0;
+        this.game.player.maxFrame = 3;
+        this.game.player.frameY = 0;
+        this.game.player.frameInterval = 1000/5;
     }
     handleInput(input){
         if (input.includes("ArrowRight")){
             this.game.player.setState(states.RUNNINGR, 2);
-        } else if (input.includes("ArrowLeft") && this.game.player.x > 0) {
+        } else if (input.includes("ArrowLeft")) {
             this.game.player.setState(states.RUNNINGL, -0.3);
         } else if (input.includes(" ")){
             this.game.player.setState(states.ATTACK, 0);
@@ -49,12 +48,10 @@ export class RunningR extends State {
         super("RUNNINGR", game);
     }
     enter(){
-        this.game.player.width = 300;
-        this.game.player.height = 140;
         this.game.player.frameX = 0;
-        this.game.player.maxFrame = 1;
-        this.game.player.frameY = 1.8;
-        this.game.player.frameInterval = 1000/5;
+        this.game.player.maxFrame = 2;
+        this.game.player.frameY = 2;
+        this.game.player.frameInterval = 1000/20;
     }
     handleInput(input){
         this.game.particles.push(new Dust(this.game, this.game.player.x + this.game.player.width * 0.5,
@@ -73,9 +70,7 @@ export class Jumping extends State {
     }
     enter(){
         if (this.game.player.onGround()) this.game.player.vy -= 25;  //how tall the game.player jump
-        this.game.player.width = 80;
-        this.game.player.height = 110;
-        this.game.player.frameX = 1;
+        this.game.player.frameX = 0;
         this.game.player.maxFrame = 5;
         this.game.player.frameY = 1;
         this.game.player.frameInterval = 1000/5;
@@ -94,10 +89,8 @@ export class Falling extends State {
         super("FALLING", game);
     }
     enter(){
-        this.game.player.width = 80;
-        this.game.player.height = 110;
         this.game.player.frameX = 3;
-        this.game.player.maxFrame = 5;
+        this.game.player.maxFrame = 2;
         this.game.player.frameY = 1;
         this.game.player.frameInterval = 1000/5;
     }
@@ -113,11 +106,10 @@ export class RunningL extends State {
         super("RUNNINGL", game);
     }
     enter(){
-        this.game.player.width = 85;
-        this.game.player.height = 110;
         this.game.player.frameX = 0;
-        this.game.player.maxFrame = 0;
-        this.game.player.frameY = 3.7;
+        this.game.player.maxFrame = 2;
+        this.game.player.frameY = 6;
+        this.game.player.frameInterval = 1000/20;
     }
     handleInput(input){
         this.game.particles.unshift(new Dust(this.game, this.game.player.x + this.game.player.width * 0.5,
@@ -135,8 +127,6 @@ export class Stand extends State {
         super("STAND", game);
     }
     enter(){
-        this.game.player.width = 75;
-        this.game.player.height = 110;
         this.game.player.frameX = 0;
         this.game.player.maxFrame = 3;
         this.game.player.frameY = 0;
@@ -158,11 +148,9 @@ export class Attack extends State {
         super("ATTACK", game);
     }
     enter(){
-        this.game.player.width = 85;
-        this.game.player.height = 110;
         this.game.player.frameX = 0;
-        this.game.player.maxFrame = 4;
-        this.game.player.frameY = 6.8;
+        this.game.player.maxFrame = 6;
+        this.game.player.frameY = 3;
         this.game.player.frameInterval = 1000/10;
     }
     handleInput(input){
@@ -179,11 +167,9 @@ export class Kame extends State {
         super("KAME", game);
     }
     enter(){
-        this.game.player.width = 750;
-        this.game.player.height = 350;
         this.game.player.frameX = 0;
-        this.game.player.maxFrame = 1;
-        this.game.player.frameY = 2.7;
+        this.game.player.maxFrame = 8;
+        this.game.player.frameY = 5;
         this.game.player.frameInterval = 1000/5;
     }
     handleInput(input){
